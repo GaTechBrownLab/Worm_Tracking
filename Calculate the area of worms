@@ -1,0 +1,33 @@
+How to segment worm individual and calculate the area
+
+
+#test with run_305_timt01.jpg
+#open image
+> img = load("run_305_timt01.jpg")
+
+#change to gray image
+> imgg = Gray.(img)
+
+#contrast enhancing 
+> imggs = imstretch(imgg,2,2)
+
+#segementattion
+> seg = felzenszwalb(imggs, 1000, 10000)
+
+#visualized result 
+> imshow(map(i->segment_mean(seg,i), labels_map(seg)))
+
+#manually pick up the 2 median value which means the two wroms
+> segment_mean(seg2)
+
+## Dict{Int64,Float64} with 5 entries:
+  4 => 0.000682846
+  2 => 0.0728945
+  3 => 0.0248949
+  5 => 0.0359559
+  1 => 0.00201661
+
+> segment_pixel_count(seg2, 3)
+##100522
+> segment_pixel_count(seg2, 5)
+##99118
